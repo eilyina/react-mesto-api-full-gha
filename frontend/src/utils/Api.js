@@ -107,6 +107,51 @@ export default class Api {
       });
 
   }
+
+  register(email, password) {
+    return fetch(`${this.url}signup`, {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify({ email, password }),
+    })
+      .then(res => this._handleResponse(res))
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
+
+  };
+
+  authorize(email, password) {
+    return fetch(`${this.url}signin`, {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify({ email, password }),
+    })
+      .then(res => this._handleResponse(res))
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
+
+  };
+
+  checkToken(token) {
+    return fetch(`${this.url}users/me`, {
+
+      headers: {
+        headers: this.headers,
+        'Authorization': `Bearer ${token}`,
+      }
+    })
+      // .then(data => {return data})
+      .then(res => this._handleResponse(res))
+      .catch(err => {
+        console.log(err);
+        throw err;
+      });
+
+  }
 }
 
 export const api = new Api(
@@ -115,5 +160,13 @@ export const api = new Api(
     headers: {
       authorization: 'e09a1222-df71-4836-98f4-17c2724f4e45',
       'Content-Type': 'application/json'
+    }
+  });
+
+export const apiAuth = new Api(
+  {
+    baseUrl: 'https://auth.nomoreparties.co/',
+    headers: {
+      "Content-Type": "application/json"
     }
   });
