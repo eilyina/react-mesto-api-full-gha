@@ -1,0 +1,9 @@
+.popup__input_type_error {
+  border-bottom-color: red;
+  margin: 0;
+  padding: 0 0 8px 0;
+
+
+  /* Нижняя рамка становится красной всякий раз,
+  когда введённые данные некорректны */
+}

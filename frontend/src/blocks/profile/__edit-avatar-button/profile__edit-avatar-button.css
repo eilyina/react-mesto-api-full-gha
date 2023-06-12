@@ -1,0 +1,29 @@
+.profile__edit-avatar-button {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+}
+
+.profile__edit-avatar-button:hover {
+  border: none;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-position: center;
+  background-image: url("../../../images/pen.png");
+  background-size: 26px;
+  background-repeat: no-repeat;
+  transition: background-color 0.5s;
+}
+
+@media screen and (max-width:800px) {
+  .profile__edit-button {
+    height: 18px;
+    width: 18px;
+
+  }
+}
