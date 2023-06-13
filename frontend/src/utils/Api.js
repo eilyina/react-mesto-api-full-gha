@@ -194,7 +194,7 @@ export default class Api {
 export const api = new Api(
   {
     // baseUrl: 'http://localhost:3000'
-    baseUrl: 'https://eilyina.nomoredomains.rocks'
+    baseUrl: 'https://api.eilyina.nomoredomains.rocks'
     // ,
     // headers: {
     //   // authorization: 'e09a1222-df71-4836-98f4-17c2724f4e45',
