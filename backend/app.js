@@ -15,8 +15,8 @@ const corsOptions = {
 };
 const app = express(); // создаём сервер
 
-//app.use(cors(corsOptions));
-app.use(cors());
+app.use(cors(corsOptions));
+//app.use(cors());
 // подключаемся к серверу mongo
 app.use(express.json());
 // подключаемся к серверу mongo
