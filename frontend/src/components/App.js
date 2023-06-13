@@ -64,11 +64,11 @@ function App() {
     if (!jwt) {
       return
     }
-    apiAuth.checkToken(jwt)
+    apiAuth.checkToken()
       .then(res => {
         if (res) {
           setLoggedIn(true)
-          setUserData(res.data)
+          setUserData(res)
           navigate('/')
         }
       })
@@ -87,7 +87,7 @@ function App() {
       ])
         .then(([userData, cardData]) => {
           setCurrentUser(userData);
-          setCards(cardData);
+          setCards(cardData.reverse());
         })
         .catch((err) => console.log(`${err}`))
     }
@@ -103,7 +103,7 @@ function App() {
   }
   const handleCardLike = (card) => {
 
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     api.changeLikeCardStatus(card.id, isLiked)
       .then((newCard) => {

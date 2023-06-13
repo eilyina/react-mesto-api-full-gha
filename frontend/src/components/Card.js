@@ -4,8 +4,13 @@ import React from "react";
 function Card(card) {
 
   const user = React.useContext(CurrentUserContext);
-  const isOwn = card.owner._id === user._id;
-  const isLiked = card.likes.some(i => i._id === user._id);
+ 
+
+  const isOwn = card.owner === user._id;
+const isLiked = card.likes.some((i) => {
+  // console.log(i._id)
+  // console.log(user._id)
+  return i === user._id});
   const cardLikeButtonClassName =
     `photo-grid__like ${isLiked && 'photo-grid__like_active'}`;
 

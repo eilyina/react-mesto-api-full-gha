@@ -1,7 +1,6 @@
 export default class Api {
   constructor(config) {
     this.url = config.baseUrl;
-    this.headers = config.headers;
   }
 
   _handleResponse(res) {
@@ -13,8 +12,11 @@ export default class Api {
   }
 
   getUserInfo() {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this.url}/users/me`, {
-      headers: this.headers
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
     })
       // .then(data => {return data})
       .then(res => this._handleResponse(res))
@@ -26,8 +28,12 @@ export default class Api {
   }
 
   getInitialCards() {
+
+    const token = localStorage.getItem('jwt');
     return fetch(`${this.url}/cards`, {
-      headers: this.headers
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
     })
       .then(res => this._handleResponse(res))
       .catch(err => {
@@ -37,9 +43,13 @@ export default class Api {
   }
 
   updateUserInfo(userData) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this.url}/users/me`, {
       method: 'PATCH',
-      headers: this.headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name: userData.name,
         about: userData.about
@@ -53,9 +63,13 @@ export default class Api {
   }
 
   createCard(cardData) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this.url}/cards`, {
       method: 'POST',
-      headers: this.headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name: cardData.name,
         link: cardData.link
@@ -69,9 +83,13 @@ export default class Api {
   }
 
   deleteCard(idCard) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this.url}/cards/${idCard}`, {
       method: 'DELETE',
-      headers: this.headers
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
     })
       .then(res => this._handleResponse(res))
       .catch(err => {
@@ -81,9 +99,13 @@ export default class Api {
   }
 
   updateUserAvatar(userAvatar) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this.url}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this.headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({
         avatar: userAvatar
       })
@@ -96,9 +118,14 @@ export default class Api {
   }
 
   changeLikeCardStatus(idCard, isLike) {
+    // console.log(isLike8)
+    const token = localStorage.getItem('jwt');
     return fetch(`${this.url}/cards/${idCard}/likes`, {
       method: isLike ? 'DELETE' : 'PUT',
-      headers: this.headers
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
     })
       .then(res => this._handleResponse(res))
       .catch(err => {
@@ -109,9 +136,15 @@ export default class Api {
   }
 
   register(email, password) {
-    return fetch(`${this.url}signup`, {
+    const token = localStorage.getItem('jwt');
+    return fetch(`${this.url}/signup`, {
       method: 'POST',
-      headers: this.headers,
+      headers: {
+        // headers: this.headers,
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
+        
+      },
       body: JSON.stringify({ email, password }),
     })
       .then(res => this._handleResponse(res))
@@ -123,9 +156,13 @@ export default class Api {
   };
 
   authorize(email, password) {
-    return fetch(`${this.url}signin`, {
+    const token = localStorage.getItem('jwt');
+    return fetch(`${this.url}/signin`, {
       method: 'POST',
-      headers: this.headers,
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({ email, password }),
     })
       .then(res => this._handleResponse(res))
@@ -136,12 +173,12 @@ export default class Api {
 
   };
 
-  checkToken(token) {
-    return fetch(`${this.url}users/me`, {
+  checkToken = () => {
+    const token = localStorage.getItem('jwt');
+    return fetch(`${this.url}/users/me`, {
 
       headers: {
-        headers: this.headers,
-        'Authorization': `Bearer ${token}`,
+        authorization : `Bearer ${token}`
       }
     })
       // .then(data => {return data})
@@ -156,17 +193,19 @@ export default class Api {
 
 export const api = new Api(
   {
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-60',
-    headers: {
-      authorization: 'e09a1222-df71-4836-98f4-17c2724f4e45',
-      'Content-Type': 'application/json'
-    }
+    baseUrl: 'http://localhost:3000'
+    // ,
+    // headers: {
+    //   // authorization: 'e09a1222-df71-4836-98f4-17c2724f4e45',
+    //   'Content-Type': 'application/json'
+    // }
   });
 
 export const apiAuth = new Api(
   {
-    baseUrl: 'https://auth.nomoreparties.co/',
-    headers: {
-      "Content-Type": "application/json"
-    }
+    baseUrl: 'http://localhost:3000'
+    // ,
+    // headers: {
+    //   "Content-Type": "application/json"
+    // }
   });
