@@ -205,7 +205,7 @@ export const api = new Api(
 export const apiAuth = new Api(
   {
     // baseUrl: 'http://localhost:3000'
-    baseUrl: 'https://eilyina.nomoredomains.rocks'
+    baseUrl: 'https://api.eilyina.nomoredomains.rocks'
     // ,
     // headers: {
     //   "Content-Type": "application/json"
