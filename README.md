@@ -8,7 +8,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.79.193
+IP 51.250.79.193
 
 Frontend https://eilyina.nomoredomains.rocks
 
